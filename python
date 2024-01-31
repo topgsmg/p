@@ -1,0 +1,337 @@
+1a...
+def get_valid_test_score():
+while True:
+try:
+score = float(input("Enter a test score: "))
+if 0 <= score <= 100:
+return score
+else:
+print("Please enter a valid test score between 0 and 100.")
+except ValueError:
+print("Invalid input. Please enter a valid number.")
+test_scores = []
+for i in range(3):
+test_scores.append(get_valid_test_score())
+test_scores.sort(reverse=True)
+# Calculate the average of the best two test scores
+best_two_averages = sum(test_scores[:2]) / 2
+# Output the result
+print("The average of the best two test scores is: {best_two_averages:.2f}")
+
+
+1b.....
+
+def is_palindrome(number):
+number_str = str(number)
+return number_str == number_str[::-1]
+def count_digits(number):
+digit_count = [0] * 10 
+while number >0:
+digit = number % 10
+digit_count[digit] += 1 
+number //= 1 
+return digit_count
+try:
+num = int(input("Enter a number: "))
+if num <0:
+print("Please enter a non-negative number.")
+else:
+if is_palindrome(num):
+print(f"{num} is a palindrome.")
+else:
+print(f"{num} is not a palindrome.")
+digit_count = count_digits(num)
+for digit, count in enumerate(digit_count):
+if count >0:
+print(f"Digit {digit} appears {count} times in the number.")
+except ValueError:
+print("Invalid input. Please enter a valid integer.")
+
+
+2a.....
+def fn(n):
+if n == 1:
+return 0
+elif n == 2:
+return 1
+else:
+return fn(n-1) + fn(n-2)
+num = int(input("Enter a number : "))
+if num > 0:
+print("fn(", num, ") = ",fn(num) , sep ="")
+else:
+print("Error in input")
+
+
+2b......
+def BinToDec(x):
+dec = 0
+i = 0
+while x>0:
+r = x%10
+if r!=0 and r!=1:
+print("Enter a valid Binary number")
+return 0
+else:
+dec = dec + r*2**i
+x = x // 10
+i += 1
+return dec
+def OctaToHexa(n):
+num = n
+dec = 0
+base = 1
+temp = num
+while temp:
+r = temp % 10
+temp = temp // 10
+dec += r * base
+base = base * 8
+result = ' '
+while dec != 0:
+temp = 0
+temp = dec % 16
+if temp < 10:
+result = str(temp) + result
+else:
+result = chr(temp + 55) + result
+dec = dec // 16
+return result
+x = int(input("Enter a Binary number "))
+result = BinToDec(x)
+if result:
+print("The Decimal equivalent of {0} is {1}".format(x, result))
+y = int(input("Enter a Octal number "))
+result = OctaToHexa(y)
+print(result)
+if result:
+print("The Hexa Decimal equivalent of {0} is {1}".format(y, result))
+
+
+3a...
+x = input("Enter a sentence")
+y = x
+print("There are",len(x.split())," words in the sentence")
+digits,upper,lower=0,0,0
+for i in x:
+if i.isdigit():
+digits+=1
+elif i.isupper():
+upper+=1
+elif i.islower():
+lower+=1
+print("There are {0} digits, {1} upper case characters and {2} lower case characters in the sentence".format(digits,upper,lower))
+
+
+3b....
+x = input("Enter first String")
+y = input("Enter second String")
+x = x.strip()
+y = y.strip()
+sim=0
+if len(x)>len(y):
+xx = x
+yy = y
+else:
+xx = y
+yy = x
+j=0
+for i in yy:
+if i==xx[j]:
+sim+=1
+else:
+pass
+j+=1
+similarity = (sim/len(xx))
+print("The similarity between the two given strings is", similarity)
+
+4a.....
+import matplotlib.pyplot as plt
+import pandas as pd
+# Initialize the lists for X and Y
+data = pd.read_csv("Cars_Barplot.csv")
+df = pd.DataFrame(data)
+X = list(df.iloc[:, 0])
+Y = list(df.iloc[:, 1])
+# Plot the data using bar() method
+plt.bar(X, Y, color='g')
+plt.title("Used Car Sales")
+plt.xlabel("Car")
+plt.ylabel("Number Sold")
+# Show the plot
+plt.show()
+      or
+import matplotlib.pyplot as plt
+# Data for the bar plot
+categories=['CategoryA','CategoryB','CategoryC','CategoryD']
+values = [10, 25, 15, 30]
+# Create a bar plot
+plt.bar(categories, values)
+#Addlabelsandatitle
+plt.xlabel('Categories')
+plt.ylabel('Values')
+plt.title('Bar Plot Example')
+# Display the plot
+plt.show()
+
+4b...
+# import the necessary libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+# Importing data.
+cars_data = pd.read_csv("Cars.csv")
+# Create scatter plot using two variables, Age and Price.
+plt.scatter(cars_data['Age'],cars_data['Price'],c='blue')
+# To set the title
+plt.title('Scatter plot of Price vs Age of the Cars')
+# To set the x and y axis labels.
+plt.xlabel('Age (months)')
+plt.ylabel('Price (Euros)')
+# To show the scatter plot
+plt.show()
+    or
+import matplotlib.pyplot as plt
+# Data for the scatter plot
+x = [1, 2, 3, 4, 5]
+y = [10, 15, 13, 17, 20]
+# Create a scatter plot
+plt.scatter(x, y, marker='o', color='blue', label='Data Points')
+# Add labels and a title
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Scatter Plot Example')
+# Add a legend
+plt.legend()
+# Display the plot
+plt.show()
+
+
+5a.....
+# import the necessary libraries
+# Pandas library for data frames
+import pandas as pd
+# numpy library to do numerical operations
+import numpy as np
+import matplotlib.pyplot as plt
+cars_data = pd.read_csv("cars.csv")
+plt.title('Histogram for distance travelled in KiloMeter')
+plt.hist(cars_data ['KM'], color='green', edgecolor='white', bins=5)
+plt.xlabel('Kilometer')
+plt.ylabel('Frequency')
+plt.show()
+   or
+import numpy as np
+# Sample data: Student grades
+grades = [75, 82, 92, 88, 78, 90, 85, 95, 70, 87, 93, 79, 81, 86, 89, 94, 73, 84, 91, 77]
+# Create a histogram
+plt.figure(figsize=(8, 6))
+plt.hist(grades, bins=[70, 75, 80, 85, 90, 95, 100], edgecolor='black', alpha=0.7, color='skyblue')
+# Customize labels and title
+plt.xlabel('Grades')
+plt.ylabel('Frequency')
+plt.title('Grade Distribution in a Class')
+# Set the x-axis limits
+plt.xlim(70,100)
+# Display the plot
+plt.show()
+
+5b.....
+# Import libraries
+import matplotlib.pyplot as plt
+import pandas as pd
+# Creating dataset
+cars_data = pd.read_csv("Cars_Barplot.csv")
+cars = cars_data["Car"]
+data = cars_data["Sales"]
+# Creating plot
+fig = plt.figure(figsize =(10, 7))
+plt.pie(data, labels = cars)
+# show plot
+plt.show()
+
+   or
+import matplotlib.pyplot as plt
+# Data for the household budget pie chart
+categories=['Housing','Utilities','Transportation','Food','Entertainment','Savings']
+expenses = [30, 10, 15, 20, 10, 15]
+colors=['#ff9999','#66b3ff','#99ff99','#ffcc99','#c2c2f0','#ffb3e6']
+explode = (0.1, 0.1, 0, 0, 0, 0)
+# Create a pie chart
+plt.pie(expenses, labels=categories, autopct='%1.1f%%', startangle=140, colors=colors, explode=explode)
+# Add a title
+plt.title('Household Budget Expenses')
+# Display the plot
+plt.show()
+
+6a......
+import matplotlib.pyplot as plt
+def linear_plot():
+# Sample data
+x = [1, 2, 3, 4, 5]
+y = [3, 7, 9, 11, 14]
+# Plotting the data
+plt.plot(x, y, label='Linear Function: y = 2x')
+# Adding labels and title
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Linear Plot Example')
+plt.legend()
+plt.show()
+# Call the function to generate the plot
+linear_plot()
+  or 
+import matplotlib.pyplot as plt
+# Data for the linear plot
+years = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+revenue = [50000, 60000, 65000, 75000, 80000, 90000, 100000, 110000]
+# Create a linear plot
+plt.plot(years,revenue, marker='o', color='green', linestyle='-', label='Annual Revenue')
+# Add labels and a title
+plt.xlabel('Year')
+plt.ylabel('Revenue ($)')
+plt.title('Company Annual Revenue Over the Years')
+# Add a grid
+plt.grid(True, linestyle='--', alpha=0.7)
+# Add a legend
+plt.legend()
+# Display the plot
+plt.show()
+
+
+6b.....
+import matplotlib.pyplot as plt
+def formatted_linear_plot():
+# Sample data
+x = [1, 2, 3, 4, 5, 6]
+y = [3, 7, 9, 11, 14, 18]
+plt.plot(x, y, marker='o', linestyle='-', color='b', label='Linear Function: y = 2x')
+# Adding labels and title
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Formatted Linear Plot Example')
+plt.legend()
+plt.grid(True) # Add a grid for better readability
+plt.show()
+# Call the function to generate the formatted linear plot
+formatted_linear_plot()
+     or
+import matplotlib.pyplot as plt
+# Data for the linear plot
+years = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+revenue = [50000, 60000, 65000, 75000, 80000, 90000, 100000, 110000]
+# Create a linear plot with line formatting
+plt.plot(years,revenue, marker='o', linestyle='-', color='green', label='Annual Revenue', linewidth=2, markersize=8)
+# Add labels and a title
+plt.xlabel('Year')
+plt.ylabel('Revenue ($)')
+plt.title('Company Annual Revenue Over the Years')
+# Add a grid
+plt.grid(True, linestyle=':', alpha=0.7)
+# Add a legend
+plt.legend()
+# Display the plot
+plt.show()
+
+
+
